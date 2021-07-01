@@ -1,10 +1,12 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 
+import 'package:covid19_app/Pages/RateUs.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import 'Pages/VaccinationPage.dart';
-import 'Pages/statePage.dart';
 import 'Pages/countyPage.dart';
+import 'Pages/statePage.dart';
 import 'Panels/infoPanel.dart';
 import 'Panels/mosteffectedcountries.dart';
 import 'Panels/worldwidepanel.dart';
@@ -66,6 +68,35 @@ class _HomePageState extends State<HomePage> {
                     darkThemeEnabled = changedTheme;
                   });
                 }),
+            IconButton(
+              icon: Icon(Icons.rate_review),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Rate Us'),
+                      actions: [
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RateUs()));
+                            },
+                            child: Text('Yes')),
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true).pop();
+                            },
+                            child: Text('No')),
+                      ],
+                      content: Text("Please Rate According To Your Expereince"),
+                    );
+                  },
+                );
+              },
+            ),
           ],
           centerTitle: false,
           title: Text(
@@ -109,13 +140,13 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    VaccinationPage(themeChanger: darkThemeEnabled)));
+                                builder: (context) => VaccinationPage(
+                                    themeChanger: darkThemeEnabled)));
                       },
                       child: Container(
                           decoration: BoxDecoration(
                               color:
-                              darkThemeEnabled ? Colors.red : primaryBlack,
+                                  darkThemeEnabled ? Colors.red : primaryBlack,
                               borderRadius: BorderRadius.circular(15)),
                           padding: EdgeInsets.all(10),
                           child: Text(
@@ -134,12 +165,14 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CountryPage(themeChanger: darkThemeEnabled)));
+                                    builder: (context) => CountryPage(
+                                        themeChanger: darkThemeEnabled)));
                           },
                           child: Container(
                               decoration: BoxDecoration(
-                                  color:
-                                  darkThemeEnabled ? Colors.red : primaryBlack,
+                                  color: darkThemeEnabled
+                                      ? Colors.red
+                                      : primaryBlack,
                                   borderRadius: BorderRadius.circular(15)),
                               padding: EdgeInsets.all(10),
                               child: Text(
@@ -151,18 +184,22 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.bold),
                               )),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => statePage(themeChanger: darkThemeEnabled)));
+                                    builder: (context) => statePage(
+                                        themeChanger: darkThemeEnabled)));
                           },
                           child: Container(
                               decoration: BoxDecoration(
-                                  color:
-                                  darkThemeEnabled ? Colors.red : primaryBlack,
+                                  color: darkThemeEnabled
+                                      ? Colors.red
+                                      : primaryBlack,
                                   borderRadius: BorderRadius.circular(15)),
                               padding: EdgeInsets.all(10),
                               child: Text(
